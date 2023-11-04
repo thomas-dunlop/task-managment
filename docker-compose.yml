@@ -1,0 +1,11 @@
+version: "3"
+services:
+  db:
+    image: "postgres:15.1"
+    ports:
+      - 54320:5432
+    environment:
+      - POSTGRES_DB=task_management_dev
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: always
