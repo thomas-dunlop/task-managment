@@ -18,7 +18,7 @@ const TaskForm = function () {
   const [createTask] = useCreateTaskMutation();
 
   const onSubmit = async (formData) => {
-    await createTask(formData);
+    await createTask({ ...formData, badges: formData.badges.map((element) => element.id) });
   };
 
   const populateTaskFromTaskOption = (taskOption) => {

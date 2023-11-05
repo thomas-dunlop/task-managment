@@ -56,7 +56,7 @@ class TaskDetail(APIView):
 
     def put(self, request, pk, format=None):
         task = self.get_object(pk)
-        serializer = TaskSerializer(task, data=request.data)
+        serializer = TaskWriteSerializer(task, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)

@@ -28,6 +28,14 @@ const api = createApi({
       query: () => 'taskBadges',
       providesTags: ['TaskBadges']
     }),
+    updateTask: build.mutation({
+      query: ({ id, body }) => ({
+        url: `tasks/${id}`,
+        method: 'PUT',
+        body
+      }),
+      invalidatesTags: ['Tasks']
+    }),
   })
 });
 
@@ -36,7 +44,8 @@ export const {
   useGetTasksQuery,
   useGetTaskOptionsQuery,
   useCreateTaskMutation,
-  useGetTaskBadgesQuery
+  useGetTaskBadgesQuery,
+  useUpdateTaskMutation
 } = api;
 
 export const {
