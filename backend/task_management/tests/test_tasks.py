@@ -1,24 +1,23 @@
 import pytest
-from task_management.models import Task, TaskOption
+from task_management.models import Task
 from task_management.serializers import TaskSerializer
 import datetime
 
 
 @pytest.mark.django_db
 def test_get_tasks(drf_client):
-    new_option = TaskOption(
-        name="Walk Buddy and Lili",
-        start_time=datetime.time(10, 00, 00),
-        end_time=datetime.time(12, 00, 00),
-        duration=0.5,
-    )
-    new_option.save()
+    new_option_args = {
+        "name": "Walk Buddy and Lili",
+        "start_time": datetime.time(10, 00, 00),
+        "end_time": datetime.time(12, 00, 00),
+        "duration": 0.5,
+    }
     completed_task = Task(
         complete=True,
         start=datetime.datetime.now(),
         end=datetime.datetime.now() + datetime.timedelta(days=10),
         priority=3,
-        option=new_option,
+        **new_option_args
     )
     completed_task.save()
     incompleted_task = Task(
@@ -26,10 +25,10 @@ def test_get_tasks(drf_client):
         start=datetime.datetime.now(),
         end=datetime.datetime.now() + datetime.timedelta(days=10),
         priority=2,
-        option=new_option,
+        **new_option_args
     )
     incompleted_task.save()
-    unscheduled_task = Task(complete=False, priority=1, option=new_option)
+    unscheduled_task = Task(complete=False, priority=1, **new_option_args)
     unscheduled_task.save()
 
     get_all_tasks_result = drf_client.get("/tasks/")

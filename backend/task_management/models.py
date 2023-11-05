@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 
 class TaskBadge(models.Model):
@@ -20,4 +21,8 @@ class Task(models.Model):
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
     priority = models.BigIntegerField(default=1)
-    option = models.ForeignKey(TaskOption, on_delete=models.CASCADE)
+    name = models.TextField(default="Walk Lili and Buddy")
+    start_time = models.TimeField(default=datetime.time(9, 00))
+    end_time = models.TimeField(default=datetime.time(17, 00))
+    duration = models.FloatField(default=1)
+    badges = models.ManyToManyField(TaskBadge, null=True, blank=True)

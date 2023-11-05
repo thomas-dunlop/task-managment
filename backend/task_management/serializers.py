@@ -17,7 +17,7 @@ class TaskOptionSerializer(ModelSerializer):
 
 
 class TaskSerializer(ModelSerializer):
-    option = TaskOptionSerializer()
+    badges = TaskBadgeSerializer(many=True)
 
     class Meta:
         model = Task
