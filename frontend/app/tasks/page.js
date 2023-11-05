@@ -7,6 +7,7 @@ function TaskPage() {
     <div className="content">
       <h1>Tasks</h1>
       <TaskForm />
+      <hr />
       <TaskGrid />
       <Button variant="primary">Primary</Button>
     </div>

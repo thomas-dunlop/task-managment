@@ -13,7 +13,7 @@ const TaskGrid = function () {
     <Container>
       <div className="ag-theme-alpine" style={{ height: '500px', width: '90%' }}>
         <AgGridReact
-          rowData={tasks?.map((element) => ({ ...element, name: element.option.name, badges: element.option.badges }))}
+          rowData={tasks}
           columnDefs={[{ field: 'complete', rowDrag: true }, { field: 'name' }, { field: 'id' }, { field: 'badges', cellRenderer: badgeRenderer }]}
           rowDragManaged
           suppressMoveWhenRowDragging

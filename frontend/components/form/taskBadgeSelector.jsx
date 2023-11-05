@@ -3,7 +3,7 @@
 import { useGetTaskOptionsQuery } from '../../store/services/api';
 import SingleSelector from './singleSelector';
 
-const TaskOptionSelector = function ({
+const TaskBadgeSelector = function ({
   onSelect,
   defaultOption,
   disabled = false
@@ -17,4 +17,4 @@ const TaskOptionSelector = function ({
   );
 };
 
-export default TaskOptionSelector;
+export default TaskBadgeSelector;
