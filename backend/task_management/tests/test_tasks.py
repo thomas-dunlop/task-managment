@@ -41,22 +41,22 @@ def test_get_tasks(drf_client):
         TaskSerializer(completed_task).data,
     ]
 
-    get_complete_tasks = drf_client.get("/tasks/", {"isComplete": True})
+    get_complete_tasks = drf_client.get("/tasks/", {"isComplete": "true"})
     assert get_complete_tasks.status_code == 200
     assert get_complete_tasks.data == [TaskSerializer(completed_task).data]
 
-    get_incomplete_tasks = drf_client.get("/tasks/", {"isIncomplete": True})
+    get_incomplete_tasks = drf_client.get("/tasks/", {"isIncomplete": "true"})
     assert get_incomplete_tasks.status_code == 200
     assert get_incomplete_tasks.data == [
         TaskSerializer(unscheduled_task).data,
         TaskSerializer(incompleted_task).data,
     ]
 
-    get_unscheduled_tasks = drf_client.get("/tasks/", {"isUnscheduled": True})
+    get_unscheduled_tasks = drf_client.get("/tasks/", {"isUnscheduled": "true"})
     assert get_unscheduled_tasks.status_code == 200
     assert get_unscheduled_tasks.data == [TaskSerializer(unscheduled_task).data]
 
-    get_scheduled_tasks = drf_client.get("/tasks/", {"isScheduled": True})
+    get_scheduled_tasks = drf_client.get("/tasks/", {"isScheduled": "true"})
     assert get_scheduled_tasks.status_code == 200
     assert get_scheduled_tasks.data == [
         TaskSerializer(incompleted_task).data,

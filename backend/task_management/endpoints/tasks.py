@@ -4,25 +4,30 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+import json
 
 
 class TaskList(APIView):
     def get(self, request, format=None):
         tasks = Task.objects.all().order_by("priority")
 
-        is_scheduled = self.request.query_params.get("isScheduled", False)
+        is_scheduled = json.loads(self.request.query_params.get("isScheduled", "false"))
         if is_scheduled:
             tasks = tasks.filter(start__isnull=False)
 
-        is_unscheduled = self.request.query_params.get("isUnscheduled", False)
+        is_unscheduled = json.loads(
+            self.request.query_params.get("isUnscheduled", "false")
+        )
         if is_unscheduled:
             tasks = tasks.filter(start__isnull=True)
 
-        is_complete = self.request.query_params.get("isComplete", False)
+        is_complete = json.loads(self.request.query_params.get("isComplete", "false"))
         if is_complete:
             tasks = tasks.filter(complete=True)
 
-        is_incomplete = self.request.query_params.get("isIncomplete", False)
+        is_incomplete = json.loads(
+            self.request.query_params.get("isIncomplete", "false")
+        )
         if is_incomplete:
             tasks = tasks.filter(complete=False)
 
