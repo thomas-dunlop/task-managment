@@ -62,6 +62,8 @@ module.exports = {
     ],
     '@typescript-eslint/no-explicit-any': 0,
     '@typescript-eslint/ban-ts-comment': 0,
-    'import/no-named-as-default': 0
+    'import/no-named-as-default': 0,
+    'import/no-extraneous-dependencies': ['error', { devDependencies: false, optionalDependencies: false, peerDependencies: false }]
+
   },
 };
