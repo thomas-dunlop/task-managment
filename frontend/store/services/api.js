@@ -4,7 +4,7 @@ const getApiUrl = () => 'http://127.0.0.1:8000/';
 
 const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: getApiUrl() }),
-  tagTypes: ['Tasks', 'TaskOptions'],
+  tagTypes: ['Tasks', 'TaskOptions', 'TaskBadges'],
   endpoints: (build) => ({
     getTasks: build.query({
       query: ({
@@ -24,6 +24,10 @@ const api = createApi({
       }),
       invalidatesTags: ['Tasks']
     }),
+    getTaskBadges: build.query({
+      query: () => 'taskBadges',
+      providesTags: ['TaskBadges']
+    }),
   })
 });
 
@@ -31,7 +35,8 @@ const api = createApi({
 export const {
   useGetTasksQuery,
   useGetTaskOptionsQuery,
-  useCreateTaskMutation
+  useCreateTaskMutation,
+  useGetTaskBadgesQuery
 } = api;
 
 export const {

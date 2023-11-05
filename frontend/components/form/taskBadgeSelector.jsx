@@ -1,18 +1,18 @@
 'use client';
 
-import { useGetTaskOptionsQuery } from '../../store/services/api';
-import SingleSelector from './singleSelector';
+import { useGetTaskBadgesQuery } from '../../store/services/api';
+import Selector from './selector';
 
 const TaskBadgeSelector = function ({
   onSelect,
   defaultOption,
   disabled = false
 }) {
-  const { data: options } = useGetTaskOptionsQuery();
+  const { data: options } = useGetTaskBadgesQuery();
 
   return (
     <div className="content">
-      <SingleSelector onSelect={onSelect} defaultOption={defaultOption} disabled={disabled} options={options} />
+      <Selector onSelect={onSelect} defaultOption={defaultOption} disabled={disabled} options={options} isMulti />
     </div>
   );
 };

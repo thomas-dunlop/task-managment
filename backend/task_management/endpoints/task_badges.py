@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-class TaskOptionList(APIView):
+class TaskBadgeList(APIView):
     def get(self, request, format=None):
         task_badges = TaskBadge.objects.all()
 

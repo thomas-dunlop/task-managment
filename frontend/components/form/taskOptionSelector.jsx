@@ -1,7 +1,7 @@
 'use client';
 
 import { useGetTaskOptionsQuery } from '../../store/services/api';
-import SingleSelector from './singleSelector';
+import Selector from './selector';
 
 const TaskOptionSelector = function ({
   onSelect,
@@ -12,7 +12,7 @@ const TaskOptionSelector = function ({
 
   return (
     <div className="content">
-      <SingleSelector onSelect={onSelect} defaultOption={defaultOption} disabled={disabled} options={options} />
+      <Selector onSelect={onSelect} defaultOption={defaultOption} disabled={disabled} options={options} />
     </div>
   );
 };

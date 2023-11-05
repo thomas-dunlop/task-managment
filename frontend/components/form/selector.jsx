@@ -1,31 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import Select from 'react-select';
 
-const SingleSelector = function ({
+const Selector = function ({
   onSelect,
   defaultOption,
   disabled = false,
-  options
+  options,
+  isMulti = false
 }) {
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  useEffect(() => {
-    setSelectedOption(null);
-    if (defaultOption && options) {
-      const option = options.filter((entry) => entry.id === defaultOption.id);
-      if (option === 1) {
-        setSelectedOption(option[0]);
-      }
-    }
-  }, [defaultOption, options]);
-
-  const onChange = (option) => {
-    setSelectedOption(option);
-    onSelect(option);
-  };
-
   const customStyles = {
     control: (base, state) => ({
       ...base,
@@ -42,10 +25,11 @@ const SingleSelector = function ({
   return (
     <div className="content">
       <Select
-        onChange={onChange}
+        onChange={(option) => onSelect(option)}
         options={options}
-        value={selectedOption}
+        value={defaultOption}
         isClearable
+        isMulti={isMulti}
         placeholder="type or select from the dropdown..."
         getOptionLabel={(option) => `${option.name}`}
         getOptionValue={(option) => `${option.id}`}
@@ -56,4 +40,4 @@ const SingleSelector = function ({
   );
 };
 
-export default SingleSelector;
+export default Selector;

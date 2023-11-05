@@ -4,12 +4,17 @@ import Container from 'react-bootstrap/Container';
 import { useForm, Controller } from 'react-hook-form';
 import { Button } from 'react-bootstrap';
 import TaskOptionSelector from '../form/taskOptionSelector';
+import TaskBadgeSelector from '../form/taskBadgeSelector';
 import { useCreateTaskMutation } from '../../store/services/api';
 
 const TaskForm = function () {
   const {
-    handleSubmit, register, setValue, reset
-  } = useForm({ defaultValues: { duration: 60, start_time: '09:00:00', end_time: '17:00:00' } });
+    handleSubmit, register, setValue, reset, control
+  } = useForm({
+    defaultValues: {
+      duration: 60, start_time: '09:00:00', end_time: '17:00:00', badges: []
+    }
+  });
   const [createTask] = useCreateTaskMutation();
 
   const onSubmit = async (formData) => {
@@ -22,6 +27,7 @@ const TaskForm = function () {
       setValue('duration', taskOption.duration);
       setValue('start_time', taskOption.start_time);
       setValue('end_time', taskOption.end_time);
+      setValue('badges', taskOption.badges);
     } else {
       reset();
     }
@@ -53,6 +59,17 @@ const TaskForm = function () {
           <label htmlFor="inputDuration" className="form-label">Duration (min)</label>
           <input type="number" className="form-control" id="inputDuration" aria-describedby="inputDuration" {...register('duration', { required: true })} step="5" />
         </div>
+        <div className="mb-3">
+          <label htmlFor="inputBadges" className="form-label">Badges</label>
+          <Controller
+            control={control}
+            name="badges"
+            render={({ field: { onChange, value } }) => (
+              <TaskBadgeSelector onSelect={onChange} defaultOption={value} />
+            )}
+          />
+        </div>
+
         <div className="control">
           <Button type="submit">Submit</Button>
         </div>
