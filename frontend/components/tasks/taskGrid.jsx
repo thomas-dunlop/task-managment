@@ -4,16 +4,19 @@ import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import Container from 'react-bootstrap/Container';
-import { useGetTasksQuery } from '@/store/services/api';
+import { badgeRenderer } from './columnRenderers';
+import { useGetTasksQuery } from '../../store/services/api';
 
 const TaskGrid = function () {
   const { data: tasks } = useGetTasksQuery({});
   return (
     <Container>
-      <div className="ag-theme-alpine" style={{ height: '500px', width: '50%' }}>
+      <div className="ag-theme-alpine" style={{ height: '500px', width: '90%' }}>
         <AgGridReact
-          rowData={tasks?.map((element) => ({ ...element, name: element.option.name }))}
-          columnDefs={[{ field: 'complete' }, { field: 'name' }]}
+          rowData={tasks?.map((element) => ({ ...element, name: element.option.name, badges: element.option.badges }))}
+          columnDefs={[{ field: 'complete', rowDrag: true }, { field: 'name' }, { field: 'id' }, { field: 'badges', cellRenderer: badgeRenderer }]}
+          rowDragManaged
+          suppressMoveWhenRowDragging
         />
       </div>
     </Container>

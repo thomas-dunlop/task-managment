@@ -3,6 +3,8 @@ from django.db import models
 
 class TaskBadge(models.Model):
     name = models.TextField()
+    background_colour = models.TextField(default="#CFF4FC")
+    text_colour = models.TextField(default="#055160")
 
 
 class TaskOption(models.Model):
@@ -14,8 +16,8 @@ class TaskOption(models.Model):
 
 
 class Task(models.Model):
-    complete = models.BooleanField()
+    complete = models.BooleanField(default=False)
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
-    priority = models.BigIntegerField()
+    priority = models.BigIntegerField(default=1)
     option = models.ForeignKey(TaskOption, on_delete=models.CASCADE)

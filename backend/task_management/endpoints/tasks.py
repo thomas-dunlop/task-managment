@@ -1,5 +1,5 @@
 from task_management.models import Task
-from task_management.serializers import TaskSerializer
+from task_management.serializers import TaskSerializer, TaskWriteSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -35,7 +35,7 @@ class TaskList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
-        serializer = TaskSerializer(data=request.data)
+        serializer = TaskWriteSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

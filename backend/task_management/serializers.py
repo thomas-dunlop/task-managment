@@ -22,3 +22,9 @@ class TaskSerializer(ModelSerializer):
     class Meta:
         model = Task
         fields = "__all__"
+
+
+class TaskWriteSerializer(ModelSerializer):
+    class Meta:
+        model = Task
+        fields = "__all__"
