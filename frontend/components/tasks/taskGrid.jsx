@@ -32,7 +32,16 @@ const TaskGrid = function () {
           rowData={internalTasks}
           columnDefs={[
             { field: 'complete', rowDrag: true, editable: true },
-            { field: 'name' }, { field: 'id' },
+            {
+              field: 'name',
+              cellStyle: (params) => {
+                if (params.data.complete === true) {
+                  return { textDecoration: 'line-through' };
+                }
+                return null;
+              }
+            },
+            // { field: 'id' },
             { field: 'badges', cellRenderer: badgeRenderer }
           ]}
           rowDragManaged
